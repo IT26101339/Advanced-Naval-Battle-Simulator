@@ -28,8 +28,10 @@ struct Battleship battleship;
 struct EscortShip escortShips[MAX_ESCORT_SHIPS];
 int numberOfEscortShips = 0;
 
-/* Function to display the main menu */
-void displayMainMenu() {
+
+/* Display the main menu */
+void displayMainMenu()
+{
     printf("\n");
     printf("====================================\n");
     printf(" ADVANCED NAVAL BATTLE SIMULATOR\n");
@@ -41,23 +43,68 @@ void displayMainMenu() {
     printf("4. Exit\n");
 }
 
-/* Function to display Battleship information */
-void displayBattleship() {
-    printf("\n--- Battleship Information ---\n");
 
-    if (battleship.type == '\0') {
-        printf("Battleship has not been configured yet.\n");
-    } else {
-        printf("Type: %c\n", battleship.type);
-        printf("Position: (%.2f, %.2f)\n",
-               battleship.x, battleship.y);
-        printf("Maximum Velocity: %.2f\n",
-               battleship.maxVelocity);
+/* Setup the Battleship */
+void setupBattleship()
+{
+    printf("\n========== BATTLESHIP SETUP ==========\n");
+
+    printf("\nAvailable Battleships:\n");
+    printf("U - USS Iowa (BB-61)\n");
+    printf("M - MS King George V\n");
+    printf("R - Richelieu\n");
+    printf("S - Sovetsky Soyuz-class\n");
+
+    /* Get Battleship type */
+    printf("\nEnter Battleship type (U/M/R/S): ");
+    scanf(" %c", &battleship.type);
+
+    /* Check whether the type is valid */
+    while (battleship.type != 'U' &&
+           battleship.type != 'M' &&
+           battleship.type != 'R' &&
+           battleship.type != 'S')
+    {
+        printf("Invalid Battleship type!\n");
+        printf("Please enter U, M, R or S: ");
+        scanf(" %c", &battleship.type);
     }
+
+    /* Get X coordinate */
+    printf("Enter Battleship X coordinate: ");
+    scanf("%lf", &battleship.x);
+
+    /* Get Y coordinate */
+    printf("Enter Battleship Y coordinate: ");
+    scanf("%lf", &battleship.y);
+
+    /* Get maximum shell velocity */
+    printf("Enter maximum shell velocity: ");
+    scanf("%lf", &battleship.maxVelocity);
+
+    printf("\nBattleship setup completed successfully!\n");
 }
 
-int main() {
 
+/* Display Battleship information */
+void displayBattleship()
+{
+    printf("\n--- Battleship Information ---\n");
+
+    printf("Type: %c\n", battleship.type);
+
+    printf("Position: (%.2f, %.2f)\n",
+           battleship.x,
+           battleship.y);
+
+    printf("Maximum Velocity: %.2f\n",
+           battleship.maxVelocity);
+}
+
+
+/* Main function */
+int main()
+{
     int choice;
 
     /* Initial values */
@@ -68,16 +115,17 @@ int main() {
 
     printf("Welcome to the Advanced Naval Battle Simulator!\n");
 
-    do {
+    do
+    {
         displayMainMenu();
 
         printf("\nEnter your choice: ");
         scanf("%d", &choice);
 
-        switch (choice) {
-
+        switch (choice)
+        {
             case 1:
-                printf("\nStarting simulation...\n");
+                setupBattleship();
                 displayBattleship();
                 break;
 
