@@ -1,0 +1,40 @@
+========================================
+PART 1-A SIMULATION RESULTS
+========================================
+
+RESULT: BATTLESHIP SURVIVED
+
+ESCORT SHIPS HIT BY BATTLESHIP
+
+Escort Ship Index: 1
+Type: ED
+Position: (38.55, 99.02)
+Time to hit: 0.60 seconds
+
+Escort Ship Index: 2
+Type: EA
+Position: (26.94, 27.49)
+Time to hit: 0.14 seconds
+
+Escort Ship Index: 3
+Type: ED
+Position: (80.61, 65.40)
+Time to hit: 0.57 seconds
+
+Escort Ship Index: 4
+Type: EC
+Position: (36.29, 73.87)
+Time to hit: 0.36 seconds
+
+Escort Ship Index: 5
+Type: ED
+Position: (38.42, 1.22)
+Time to hit: 0.43 seconds
+
+Escort Ship Index: 6
+Type: EA
+Position: (31.68, 35.02)
+Time to hit: 0.07 seconds
+
+Total Escort Ships Hit: 6
+Battle End Time: 0.60 seconds
