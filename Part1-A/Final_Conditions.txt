@@ -1,0 +1,2 @@
+Simulation Result: Battleship Sunk
+Sunk by Escort Ship E[1] of type ED
