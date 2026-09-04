@@ -1,0 +1,16 @@
+PART 1-A INITIAL CONDITIONS
+Battlefield: (0,0) to (500.00,500.00)
+
+BATTLESHIP
+Type: U
+Name: USS Iowa (BB-61)
+Gun: 50-caliber Mark 7 gun
+Position: 50.00 50.00
+Vmax: 50.00
+
+ESCORT SHIPS
+E1 [E Japanese Kaibokan] Gun:(4.7 inch) naval guns Pos:(360.57,451.50) Vmin:22.89 Vmax:41.28 Angle:8.01-70.00 Impact:0.04
+E2 [B Gabbiano-class Corvette] Gun:L/47 dual-purpose gun Pos:(412.49,420.93) Vmin:24.56 Vmax:42.20 Angle:5.92-30.00 Impact:0.06
+E3 [A 1936A-class Destroyer] Gun:SK C/34 naval gun Pos:(408.88,250.27) Vmin:15.51 Vmax:60.00 Angle:17.19-20.00 Impact:0.08
+E4 [B Gabbiano-class Corvette] Gun:L/47 dual-purpose gun Pos:(216.97,274.76) Vmin:18.92 Vmax:44.18 Angle:5.95-30.00 Impact:0.06
+E5 [E Japanese Kaibokan] Gun:(4.7 inch) naval guns Pos:(480.00,155.92) Vmin:18.21 Vmax:45.60 Angle:15.11-70.00 Impact:0.04

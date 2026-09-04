@@ -1,0 +1,10 @@
+PART 1-A FINAL CONDITIONS
+
+Battleship: SURVIVED
+
+ESCORT SHIPS
+E1: Active
+E2: Active
+E3: Active
+E4: Active
+E5: Active

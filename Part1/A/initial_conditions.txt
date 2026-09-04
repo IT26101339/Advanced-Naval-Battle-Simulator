@@ -1,0 +1,8 @@
+PART 1-A INITIAL CONDITIONS
+Canvas: 500.00 x 500.00
+Battleship: U (50.00,50.00) Vmax=100.00
+E1 Type=EC Pos=(235.60,477.91) Vmin=34.19 Vmax=58.26 Angle=10.65-35.65 Impact=0.07
+E2 Type=EE Pos=(173.43,89.21) Vmin=31.56 Vmax=91.20 Angle=7.21-27.21 Impact=0.04
+E3 Type=EB Pos=(231.56,177.84) Vmin=24.77 Vmax=72.31 Angle=6.35-36.35 Impact=0.06
+E4 Type=EE Pos=(246.71,347.82) Vmin=20.39 Vmax=79.64 Angle=14.30-34.30 Impact=0.04
+E5 Type=EE Pos=(33.03,16.36) Vmin=23.61 Vmax=88.09 Angle=8.35-28.35 Impact=0.04

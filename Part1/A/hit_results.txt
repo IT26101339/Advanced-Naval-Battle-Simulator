@@ -1,0 +1,5 @@
+E1 Time=6.596 s
+E2 Time=1.832 s
+E3 Time=3.140 s
+E4 Time=5.048 s
+E5 Time=0.533 s

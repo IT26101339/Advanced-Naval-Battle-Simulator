@@ -1,0 +1,276 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <math.h>
+#include <time.h>
+
+#define G 9.81
+#define PI 3.14159265359
+#define MAX 100
+
+typedef struct {
+    int id;
+    char type[3];
+    double x, y, minV, maxV, minA, maxA, impact;
+    int destroyed;
+} Escort;
+
+typedef struct {
+    char type;
+    char name[30];
+    double x, y, maxV;
+    int destroyed;
+} Battle;
+
+/* Distance between two ships */
+double distance(double x1,double y1,double x2,double y2)
+{
+    return sqrt((x2-x1)*(x2-x1)+(y2-y1)*(y2-y1));
+}
+
+/* Check whether E can hit B */
+int canHit(Escort e, Battle b)
+{
+    double d = distance(e.x,e.y,b.x,b.y);
+    double best = 0, a, r;
+
+    for(a=e.minA; a<=e.maxA; a+=1) {
+        r = e.maxV*e.maxV*sin(2*a*PI/180)/G;
+        if(r > best) best = r;
+    }
+
+    return d <= best;
+}
+
+/* Calculate B's time to hit E */
+double hitTime(Battle b, Escort e)
+{
+    double d = distance(b.x,b.y,e.x,e.y);
+    double v = b.maxV;
+    double a = 45 * PI / 180;
+
+    if(d <= v*v*sin(2*a)/G)
+        return d/(v*cos(a));
+
+    return -1;
+}
+
+/* Create random E ship */
+void makeEscort(Escort *e,int id,double D,double bv)
+{
+    int t = rand()%5;
+
+    e->id=id;
+    e->x=(double)rand()/RAND_MAX*D;
+    e->y=(double)rand()/RAND_MAX*D;
+    e->minV=0.3*bv;
+    e->destroyed=0;
+
+    if(t==0) {
+        strcpy(e->type,"EA");
+        e->minA=5; e->maxA=25;
+        e->maxV=1.2*bv; e->impact=.08;
+    }
+    else if(t==1) {
+        strcpy(e->type,"EB");
+        e->minA=5; e->maxA=35;
+        e->maxV=.9*bv; e->impact=.06;
+    }
+    else if(t==2) {
+        strcpy(e->type,"EC");
+        e->minA=5; e->maxA=30;
+        e->maxV=.9*bv; e->impact=.07;
+    }
+    else if(t==3) {
+        strcpy(e->type,"ED");
+        e->minA=5; e->maxA=55;
+        e->maxV=.9*bv; e->impact=.05;
+    }
+    else {
+        strcpy(e->type,"EE");
+        e->minA=5; e->maxA=75;
+        e->maxV=.9*bv; e->impact=.04;
+    }
+}
+
+/* Save initial conditions */
+void saveInitial(Battle b,Escort e[],int n,double D)
+{
+    FILE *f=fopen("initial_conditions.txt","w");
+    int i;
+
+    fprintf(f,"INITIAL BATTLEFIELD\n");
+    fprintf(f,"Canvas: %.2f x %.2f\n",D,D);
+    fprintf(f,"Battleship: %s (%c)\n",b.name,b.type);
+    fprintf(f,"Position: %.2f %.2f\n",b.x,b.y);
+    fprintf(f,"Maximum Velocity: %.2f\n\n",b.maxV);
+
+    for(i=0;i<n;i++)
+        fprintf(f,"E%d Type:%s Pos:(%.2f,%.2f) "
+                "Vmin:%.2f Vmax:%.2f "
+                "Amin:%.2f Amax:%.2f Impact:%.2f\n",
+                e[i].id,e[i].type,e[i].x,e[i].y,
+                e[i].minV,e[i].maxV,
+                e[i].minA,e[i].maxA,e[i].impact);
+
+    fclose(f);
+}
+
+/* Save final conditions */
+void saveFinal(Battle b,Escort e[],int n,int hits,double total,int sink)
+{
+    FILE *f=fopen("final_conditions.txt","w");
+    int i;
+
+    fprintf(f,"FINAL BATTLEFIELD\n");
+
+    if(b.destroyed)
+        fprintf(f,"BATTLESHIP SANK BY E%d\n",sink);
+    else {
+        fprintf(f,"BATTLESHIP SURVIVED\n");
+        fprintf(f,"E ships destroyed: %d\n",hits);
+        fprintf(f,"Battle time: %.2f seconds\n",total);
+    }
+
+    for(i=0;i<n;i++)
+        fprintf(f,"E%d %s\n",e[i].id,
+                e[i].destroyed?"DESTROYED":"ALIVE");
+
+    fclose(f);
+}
+
+void instructions()
+{
+    printf("\nPART 1-A INSTRUCTIONS\n");
+    printf("B and E ships are stationary.\n");
+    printf("Each E can fire only once.\n");
+    printf("One hit destroys a ship.\n");
+    printf("Results are saved in text files.\n");
+}
+
+void simulation()
+{
+    Battle b;
+    Escort e[MAX];
+    double D,time,hitsTime[MAX]={0};
+    int n,i,hits=0,sink=-1;
+
+    printf("\nCanvas size: ");
+    scanf("%lf",&D);
+
+    printf("Number of E ships: ");
+    scanf("%d",&n);
+
+    if(n<1 || n>MAX || D<=0) {
+        printf("Invalid input.\n");
+        return;
+    }
+
+    printf("\nBattleship\n");
+    printf("1. USS Iowa\n");
+    printf("2. King George V\n");
+    printf("3. Richelieu\n");
+    printf("4. Sovetsky Soyuz\n");
+    printf("Select: ");
+    scanf("%d",&i);
+
+    if(i==1) {
+        b.type='U';
+        strcpy(b.name,"USS Iowa");
+    }
+    else if(i==2) {
+        b.type='M';
+        strcpy(b.name,"King George V");
+    }
+    else if(i==3) {
+        b.type='R';
+        strcpy(b.name,"Richelieu");
+    }
+    else {
+        b.type='S';
+        strcpy(b.name,"Sovetsky Soyuz");
+    }
+
+    printf("B maximum velocity: ");
+    scanf("%lf",&b.maxV);
+
+    printf("B position (x y): ");
+    scanf("%lf %lf",&b.x,&b.y);
+
+    srand(time(NULL));
+
+    for(i=0;i<n;i++)
+        makeEscort(&e[i],i+1,D,b.maxV);
+
+    saveInitial(b,e,n,D);
+
+    /* B attacks E ships */
+    for(i=0;i<n;i++) {
+        time=hitTime(b,e[i]);
+
+        if(time>=0) {
+            e[i].destroyed=1;
+            hitsTime[i]=time;
+            hits++;
+
+            printf("B hit E%d at %.2f seconds\n",
+                   e[i].id,time);
+        }
+    }
+
+    /* E attacks B */
+    for(i=0;i<n;i++) {
+        if(canHit(e[i],b)) {
+            b.destroyed=1;
+            sink=e[i].id;
+            break;
+        }
+    }
+
+    printf("\n===== RESULT =====\n");
+
+    if(b.destroyed)
+        printf("BATTLESHIP SANK BY E%d\n",sink);
+    else {
+        double last=0;
+
+        for(i=0;i<n;i++)
+            if(hitsTime[i]>last)
+                last=hitsTime[i];
+
+        printf("B survived.\n");
+        printf("E ships hit: %d\n",hits);
+        printf("Battle time: %.2f seconds\n",last);
+    }
+
+    saveFinal(b,e,n,hits,
+              (b.destroyed?0:1),sink);
+
+    printf("Files saved successfully.\n");
+}
+
+int main()
+{
+    int choice;
+
+    do {
+        printf("\n===== NAVAL BATTLE SIMULATOR =====\n");
+        printf("1. Start Simulation\n");
+        printf("2. Instructions\n");
+        printf("3. Exit\n");
+        printf("Choice: ");
+        scanf("%d",&choice);
+
+        if(choice==1)
+            simulation();
+        else if(choice==2)
+            instructions();
+        else if(choice==3)
+            printf("Goodbye!\n");
+        else
+            printf("Invalid choice.\n");
+
+    } while(choice!=3);
+
+    return 0;
+}
