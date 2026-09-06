@@ -1,0 +1,2 @@
+--- Step 1 | B at (9.70, 4.77) ---
+  Outcome: Battleship Sunk by E[2] (EA)

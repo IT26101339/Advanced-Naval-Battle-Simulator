@@ -1,0 +1,12 @@
+Canvas Size: 10.00 x 10.00
+Battleship: Type S, Vmax 91.21
+Path Points (k=3):
+  P1: (9.70, 4.77)
+  P2: (6.48, 0.16)
+  P3: (4.70, 7.28)
+Escort Ships:
+  E[1]: Type EA, Pos (9.93, 0.80), V[12.4-109.5], Ang[10-30]
+  E[2]: Type EA, Pos (4.48, 4.98), V[10.5-109.5], Ang[62-82]
+  E[3]: Type ED, Pos (9.71, 2.21), V[15.1-45.6], Ang[16-66]
+  E[4]: Type EB, Pos (4.16, 2.56), V[19.2-54.0], Ang[18-48]
+  E[5]: Type ED, Pos (0.76, 8.22), V[17.8-48.0], Ang[38-88]

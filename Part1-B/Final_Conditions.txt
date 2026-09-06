@@ -1,0 +1,3 @@
+Simulation Result: Battleship Sunk
+Sunk at Step: 1
+Sunk by Escort Ship E[2] of type EA
