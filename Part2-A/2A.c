@@ -182,14 +182,72 @@ int main() {
 
     printf("\n\nRESULT: B SURVIVED with %.1f%% health!\n\n", B.health);
 
-    // Save File Output Simulation
-    FILE *f1 = fopen("Initial_Conditions.txt", "w"); if (f1) fclose(f1);
-    FILE *f2 = fopen("Simulation_Statistics.txt", "w"); if (f2) fclose(f2);
-    FILE *f3 = fopen("Final_Conditions.txt", "w"); if (f3) fclose(f3);
+    // Save simulation results to text files
 
-    printf("[SAVED] Initial_Conditions.txt\n");
-    printf("[SAVED] Simulation_Statistics.txt\n");
-    printf("[SAVED] Final_Conditions.txt\n\n");
+FILE *f1 = fopen("Initial_Conditions.txt", "w");
+if (f1) {
+    fprintf(f1, "=== INITIAL CONDITIONS ===\n");
+    fprintf(f1, "Random Seed: %d\n", seed);
+    fprintf(f1, "Canvas Size: %d\n", canvas_size);
+    fprintf(f1, "Number of Escorts: %d\n", N);
+    fprintf(f1, "Path Points: %d\n", k);
+    fprintf(f1, "Battleship Type: %c\n", B.type);
+    fprintf(f1, "Battleship Vmax: %.2f m/s\n", B.max_velocity);
+    fprintf(f1, "Battleship Reload Time: %.2f s\n", B.reload_time);
+
+    fprintf(f1, "\n=== ESCORT SHIPS ===\n");
+    for (int i = 0; i < N; i++) {
+        int t = escorts[i].type_idx;
+
+        fprintf(f1, "E[%d] | Type: %s | Position: (%.2f, %.2f)\n",
+                escorts[i].id,
+                escort_types[t].notation,
+                escorts[i].x,
+                escorts[i].y);
+    }
+
+    fclose(f1);
+}
+
+FILE *f2 = fopen("Simulation_Statistics.txt", "w");
+if (f2) {
+    fprintf(f2, "=== SIMULATION STATISTICS ===\n");
+    fprintf(f2, "Battleship Type: %c\n", B.type);
+    fprintf(f2, "Battleship Vmax: %.2f m/s\n", B.max_velocity);
+    fprintf(f2, "Battleship Reload Time: %.2f s\n", B.reload_time);
+    fprintf(f2, "Number of Escorts: %d\n", N);
+    fprintf(f2, "Number of Path Points: %d\n", k);
+
+    fprintf(f2, "\n=== ESCORT RELOAD TIMES ===\n");
+    for (int i = 0; i < 5; i++) {
+        fprintf(f2, "%s: %.2f s\n",
+                escort_types[i].notation,
+                escort_types[i].reload_time);
+    }
+
+    fclose(f2);
+}
+
+FILE *f3 = fopen("Final_Conditions.txt", "w");
+if (f3) {
+    fprintf(f3, "=== FINAL CONDITIONS ===\n");
+    fprintf(f3, "Battleship Health: %.1f%%\n", B.health);
+    fprintf(f3, "Battleship Final Position: (%.2f, %.2f)\n", B.x, B.y);
+
+    fprintf(f3, "\n=== ESCORT STATUS ===\n");
+    for (int i = 0; i < N; i++) {
+        fprintf(f3, "E[%d] - %s - %s\n",
+                escorts[i].id,
+                escort_types[escorts[i].type_idx].notation,
+                escorts[i].destroyed ? "DESTROYED" : "ALIVE");
+    }
+
+    fclose(f3);
+}
+
+printf("[SAVED] Initial_Conditions.txt\n");
+printf("[SAVED] Simulation_Statistics.txt\n");
+printf("[SAVED] Final_Conditions.txt\n\n");
 
     printf("Press ENTER to exit...");
     getchar();
