@@ -1,0 +1,7 @@
+Seed: 2
+Canvas: 10x10
+Battleship Vmax: 170.10
+E[0] Type: EE Pos: (3.23, 9.88)
+E[1] Type: EC Pos: (2.75, 5.97)
+E[2] Type: EC Pos: (8.48, 1.85)
+E[3] Type: EC Pos: (8.90, 8.50)
