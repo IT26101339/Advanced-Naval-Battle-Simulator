@@ -1,0 +1,13 @@
+=== SIMULATION STATISTICS ===
+Battleship Type: S
+Battleship Vmax: 51.67 m/s
+Battleship Reload Time: 3.66 s
+Number of Escorts: 3
+Number of Path Points: 4
+
+=== ESCORT RELOAD TIMES ===
+EA: 8.83 s
+EB: 5.44 s
+EC: 8.46 s
+ED: 6.11 s
+EE: 6.55 s

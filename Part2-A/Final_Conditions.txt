@@ -1,0 +1,8 @@
+=== FINAL CONDITIONS ===
+Battleship Health: 100.0%
+Battleship Final Position: (6.29, 7.96)
+
+=== ESCORT STATUS ===
+E[0] - EC - DESTROYED
+E[1] - EC - DESTROYED
+E[2] - ED - DESTROYED
