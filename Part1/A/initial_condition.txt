@@ -1,3 +1,0 @@
-Battleship Type: U
-Battlefield Size: 500\nBattleship: X=50 Y=50 Type=85 V=0
-Number of Escort Ships: 0
