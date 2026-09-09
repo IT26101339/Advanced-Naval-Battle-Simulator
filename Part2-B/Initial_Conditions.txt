@@ -1,0 +1,6 @@
+Battlefield Size: 10.00 x 10.00
+Battleship: Sovetsky Soyuz-class (S), Pos: (1.91, 2.60), Vmax: 191.65, T_B: 3.40
+Escort Ships:
+E[0] Type: EA, Pos: (5.07, 1.15), MinA: 21.41, MaxA: 41.41, MinV: 40.11, MaxV: 229.97, T_E: 3.64
+E[1] Type: ED, Pos: (2.97, 6.82), MinA: 10.20, MaxA: 60.20, MinV: 41.72, MaxV: 64.54, T_E: 4.96
+E[2] Type: EC, Pos: (1.59, 7.49), MinA: 28.36, MaxA: 53.36, MinV: 30.46, MaxV: 90.62, T_E: 4.26

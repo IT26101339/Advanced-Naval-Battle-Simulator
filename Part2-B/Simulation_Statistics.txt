@@ -1,0 +1,3 @@
+[0.00s] B fired at E[0] (EA) | Dist: 3.5m | Destroyed!
+[3.50s] B fired at E[1] (ED) | Dist: 4.4m | Destroyed!
+[7.00s] B fired at E[2] (EC) | Dist: 4.9m | Destroyed!
