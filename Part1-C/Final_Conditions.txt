@@ -1,4 +1,4 @@
-B Position: (2.03, 1.56) Health: 75.00%
+B Position: (7.34, 9.25) Health: 75.00%
 E[0] Destroyed: YES
 E[1] Destroyed: YES
 E[2] Destroyed: YES
